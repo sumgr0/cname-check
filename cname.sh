@@ -14,4 +14,4 @@ while read LINE; do
             echo "$LINE: $cname" >> cname_out
         fi
     fi
-done < $1
+done < $1 #file to check
