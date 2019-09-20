@@ -3,11 +3,11 @@
 while read LINE; do
     cname=`dig $LINE CNAME +short`
 
-    tld_host=`echo $LINE | awk -F '[.:]' '{print $(NF-1)}'`
-    tld_service=`echo $cname | awk -F '[.:]' '{print $(NF-2)}'`
-    if [ "$cname" = " "]; then
+    if [ -z "$cname" ]; then
         echo "$LINE" >> no_cname
-    else 
+    else
+        tld_host=`echo $LINE | awk -F '[.:]' '{print $(NF-1)}'`
+        tld_service=`echo $cname | awk -F '[.:]' '{print $(NF-2)}'`
         if [ "$tld_host" = "$tld_service" ]; then
             echo "$LINE" >> host_match
         else
