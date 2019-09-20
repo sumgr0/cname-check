@@ -11,7 +11,7 @@ while read LINE; do
         if [ "$tld_host" = "$tld_service" ]; then
             echo "$LINE" >> host_match
         else
-            echo "$LINE: $cname" >> cname_out
+            echo "$LINE,$cname" >> cname_out
         fi
     fi
 done < $1 #file to check
