@@ -20,5 +20,6 @@ while read LINE; do
             ((co++))
         fi
     fi
-    echo "no_cname: $nc; host_match: $hm; cname_out: $co"
 done < $1 #file to check
+
+echo "no_cname: $nc; host_match: $hm; cname_out: $co"
