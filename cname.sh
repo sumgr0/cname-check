@@ -22,3 +22,4 @@ while read LINE; do
         fi
     fi
 done < $1 #file to check
+echo "no_cname: $nc; host_match: $hm; cname_out: $co"
