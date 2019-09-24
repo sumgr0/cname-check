@@ -4,7 +4,7 @@ nc=0
 hm=0
 co=0
 while read LINE; do
-    echo "no_cname: $nc; host_match: $hm; cname_out: $co"
+    echo -ne "no_cname: $nc; host_match: $hm; cname_out: $co \r"
     cname=`dig $LINE CNAME +short`
 
     if [ -z "$cname" ]; then
@@ -22,5 +22,3 @@ while read LINE; do
         fi
     fi
 done < $1 #file to check
-
-echo "no_cname: $nc; host_match: $hm; cname_out: $co"
