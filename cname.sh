@@ -8,16 +8,16 @@ while read LINE; do
 
     if [ -z "$cname" ]; then
         echo "$LINE" >> no_cname
-        (($nc++))
+        ((nc++))
     else
         tld_host=`echo $LINE | awk -F '[.:]' '{print $(NF-1)}'`
         tld_service=`echo $cname | awk -F '[.:]' '{print $(NF-2)}'`
         if [ "$tld_host" = "$tld_service" ]; then
             echo "$LINE" >> host_match
-            (($hm++))
+            ((hm++))
         else
             echo "$LINE,$cname" >> cname_out
-            (($co++))
+            ((co++))
         fi
     fi
     echo "no_cname: $nc; host_match: $hm; cname_out: $co"
