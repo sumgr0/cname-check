@@ -1,26 +1,20 @@
 #!/bin/bash
 
-nc=0
-hm=0
-co=0
 while read LINE; do
-    echo "no_cname: $nc; host_match: $hm; cname_out: $co"
     cname=`dig $LINE CNAME +short`
 
     if [ -z "$cname" ]; then
         echo "$LINE" >> no_cname
-        ((nc++))
     else
         tld_host=`echo $LINE | awk -F '[.:]' '{print $(NF-1)}'`
         tld_service=`echo $cname | awk -F '[.:]' '{print $(NF-2)}'`
         if [ "$tld_host" = "$tld_service" ]; then
             echo "$LINE" >> host_match
-            ((hm++))
         else
             echo "$LINE,$cname" >> cname_out
-            ((co++))
         fi
     fi
+tail -f no_cname | while read -r line ; do ((a++)) ; echo -ne "no_cname: \r$a" ; done
+tail -f host_match | while read -r line ; do ((a++)) ; echo -ne "host_match: \r$b" ; done
+tail -f cname_out | while read -r line ; do ((a++)) ; echo -ne "cname_out: \r$a" ; done
 done < $1 #file to check
-
-echo "no_cname: $nc; host_match: $hm; cname_out: $co"
