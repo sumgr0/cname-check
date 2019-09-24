@@ -4,6 +4,7 @@ nc=0
 hm=0
 co=0
 while read LINE; do
+    echo "no_cname: $nc; host_match: $hm; cname_out: $co"
     cname=`dig $LINE CNAME +short`
 
     if [ -z "$cname" ]; then
