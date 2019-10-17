@@ -3,6 +3,8 @@
 nc=0
 hm=0
 co=0
+
+wc -l $1
 while read LINE; do
     echo -ne "no_cname: $nc; host_match: $hm; cname_out: $co \r"
     cname=`dig $LINE CNAME +short`
