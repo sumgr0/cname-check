@@ -19,7 +19,7 @@ while read LINE; do
             echo "$LINE" >> host_match
             ((hm++))
         else
-            echo "$LINE,$cname" >> cname_out
+            echo "$LINE ==> $cname" >> cname_out
             ((co++))
         fi
     fi
